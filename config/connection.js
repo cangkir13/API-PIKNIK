@@ -1,7 +1,7 @@
 const development = {
-  database: 'orenda',
+  database: 'db_piknik_unicorn',
   username: 'root',
-  password: 'milano123',
+  password: 'Ramujibril*9',
   host: 'localhost',
   dialect: 'mysql' ,
 };

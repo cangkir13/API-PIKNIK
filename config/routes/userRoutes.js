@@ -3,26 +3,37 @@ const schemas = require('../../api/middleware/validation/validateSchema')
 
 const userRoutes = {
 
-  'POST /register':  {
-					    path: 'UserController.register',
-					    middlewares: [validate(schemas.createUser)],
-					 },
+//   'POST /register':  {
+// 					    path: 'UserController.register',
+// 					    middlewares: [validate(schemas.createUser)],
+// 					 },
+	'POST /login':{
+		path: 'Login.index',
+		middlewares:[validate(schemas.login)]
+	},
+	'POST /register':{
+		path: 'registrasi/UserRegis.index',
+		middlewares:[validate(schemas.registrasi)]
+	},
 
-  'POST /assign': {
-					path: 'TaskController.register',
-					middlewares: [validate(schemas.createTask)],
-					},
-
-  'POST /unassign': {
-					path: 'TaskController.destroy',
-					middlewares: [validate(schemas.unassignTask)],
-					},
-
-  'POST /tasks/common': {
-					     path: 'UserController.getTasks',
-					     middlewares: [validate(schemas.assignTask)],
-						},
-
+	'GET /getProvinsi':'location/LocationCnt.GetProvinsi',
+	'GET /getKabupaten': {
+		path: 'location/LocationCnt.GetKab',
+		middlewares:[validate(schemas.GetKabupaten)]
+	},
+	
+	'GET /getKecamatan': {
+		path:'location/LocationCnt.GetKec',
+		middlewares:[validate(schemas.GetKecamatan)]
+	},
+	'GET /getKelurahan':{
+		path:'location/LocationCnt.GetKel',
+		middlewares:[validate(schemas.GetKelurahan)]
+	},
+	'GET /getKodepos':{
+		path:'location/LocationCnt.GetPos',
+		middlewares:[validate(schemas.GetKodepos)]
+	},
 };
 
 module.exports = userRoutes;

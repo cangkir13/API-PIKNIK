@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const http = require('http');
 const mapRoutes = require('express-routes-mapper');
 const cors = require('cors');
+const AuthUser = require('../api/services/JwtAuth');
 
 /**
  * use .env for production
@@ -37,7 +38,9 @@ const server = http.Server(app);
 /**
  * https://www.npmjs.com/package/express-routes-mapper + middleware example
  */
-const mappedUserRoutes = mapRoutes(config.userRoutes, 'api/controllers/', validatePolicy().requiredHeaders);
+// const mappedUserRoutes = mapRoutes(config.userRoutes, 'api/controllers/', validatePolicy().requiredHeaders);
+const mappedUserRoutes = mapRoutes(config.userRoutes, 'api/controllers/');
+const mappedUserRs = mapRoutes(config.usersRs, 'api/controllers/');
 
 
 /**
@@ -59,9 +62,11 @@ app.use(helmet({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
+// auth
+app.all('/api/service/*', (req, res, next) => AuthUser(req, res, next));
 // url path for each routes
 app.use('/api', mappedUserRoutes);
+app.use('/api/service', mappedUserRs);
 
 
 server.listen(config.port, () => {
