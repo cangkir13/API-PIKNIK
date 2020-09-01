@@ -48,14 +48,6 @@ localhost:8011/api/unassign # remove task(s) from user
 localhost:8011/api/task/common # show user(s) tasks
 ```
 
-## Example Requests
-##### Create User
-```json
-{
-  "Users": ["example1@email.com","example2@email.com" ]
-}
-```
-
 
 
 
