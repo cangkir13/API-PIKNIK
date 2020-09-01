@@ -42,14 +42,16 @@ Server will starts on 127.0.0.1:8011 or on 127.0.0.1:PORT_ENV
 
 ## Routes
 ```sh
-localhost:8011/api/register # Create user(s)
-localhost:8011/api/assign # assign task(s) to user
-localhost:8011/api/unassign # remove task(s) from user
-localhost:8011/api/task/common # show user(s) tasks
+localhost:8011/api/register # Registrasi user(s)
+localhost:8011/api/login # User login
 ```
 
-
-
+## REGISTRASI
+{
+    "email":"csTES@mkik.com",
+    "password":"12345",
+    "password2":"12345"
+}
 
 
 
