@@ -6,6 +6,10 @@ const express = require('express');
 const helmet = require('helmet');
 const http = require('http');
 const mapRoutes = require('express-routes-mapper');
+const multer = require('multer');
+const upload = multer({
+  dest:'upload'
+});
 const cors = require('cors');
 const AuthUser = require('../api/services/JwtAuth');
 
@@ -60,10 +64,11 @@ app.use(helmet({
 
 // parsing body request
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(upload.array());
 app.use(bodyParser.json());
 
 // auth
-app.all('/api/service/*', (req, res, next) => AuthUser(req, res, next));
+app.all('/api/service/*',  (req, res, next) => AuthUser(req, res, next));
 // url path for each routes
 app.use('/api', mappedUserRoutes);
 app.use('/api/service', mappedUserRs);

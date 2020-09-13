@@ -18,6 +18,9 @@ const User_privilage = sequelize.define('user_privilage', {
     email:{
         type: Sequelize.STRING,
     },
+    email_verify:{
+        type: Sequelize.STRING,
+    },
     password: {
         type: Sequelize.STRING,
     },

@@ -1,7 +1,12 @@
+/**
+ * @author lepek13
+ * register detail profile users
+ */
+
 const helper = require('../../helper');
 const Validate = require('../../middleware/app_val');
 const Profileuser = require('../../models/User_profile');
-const moment = require('moment')
+const moment = require('moment');
 
 const UserProfile = () => {
     const index = async(req, res) => {
@@ -10,21 +15,31 @@ const UserProfile = () => {
             const {iduser} = req.users
             
             let validationUser = await Validate.valProfile(body)
-                        
+            console.log(validationUser);
+            
             if ( validationUser.status == false ) {
                 return res.status(422).json(helper.globalRes(
                     422, validationUser
                 ))
-            }else{
+            } 
+            let validateAccount = await Validate.valAccount(iduser, 'user')
+            if (validateAccount.status !== true) {
+                return res.status(403).json(helper.globalRes(
+                    403, validateAccount
+                ))
+            }  else{
+                let indo = (!validationUser.data)?null:validationUser.data.idlocation;
+                console.log(indo);
+                
                 await Profileuser.create({
-                    avatar:body.avatar,
                     fullname:body.fullname,
                     tgl_lahir:body.tgl_lahir,
-                    idlocation:validationUser.data.idlocation,
+                    idlocation:indo,
+                    country:(!body.country)?null:body.country,
+                    state:(!body.state)?null:body.state,
                     alamat:body.alamat,
                     no_telp:body.no_telp,
                     nik:body.nik,
-                    foto_ktp:body.foto_ktp,
                     update_at:moment(),
                     id:iduser,
                 });

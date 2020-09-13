@@ -1,3 +1,9 @@
+/**
+ * @author lepek13
+ * register user for first stap
+ * register email and password
+ */
+
 const helper = require('../../helper/');
 const validate = require('../../middleware/app_val')
 const userPre = require('../../models/User_privilage');

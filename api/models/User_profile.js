@@ -9,9 +9,6 @@ const User_profile = sequelize.define('user_profile', {
     primaryKey: true,
     autoIncrement: true,
   },
-  avatar:{
-    type:Sequelize.STRING,
-  },
   fullname:{
     type:Sequelize.STRING,
   },
@@ -24,13 +21,16 @@ const User_profile = sequelize.define('user_profile', {
   alamat:{
     type:Sequelize.STRING,
   },
+  country:{
+    type:Sequelize.STRING,
+  },
+  state:{
+    type:Sequelize.STRING,
+  },
   no_telp:{
     type:Sequelize.STRING,
   },
   nik:{
-    type:Sequelize.STRING,
-  },
-  foto_ktp:{
     type:Sequelize.STRING,
   },
   update_at:{

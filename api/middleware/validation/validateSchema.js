@@ -1,5 +1,4 @@
-const Joi = require('@hapi/joi');
-const { join } = require('core-js/fn/array');
+const Joi = require('@hapi/joi')
 
 const schemas = { 
   
@@ -37,19 +36,20 @@ const schemas = {
   }),
 
   ProfileRegister:Joi.object().keys({
-    avatar:Joi.string().required(),
     fullname:Joi.string().required(),
     tgl_lahir:Joi.string().required(),
     alamat:Joi.string().required(),
     no_telp:Joi.number().required(),
-    nik:Joi.number().required(),
-    foto_ktp:Joi.string().required(),
-    location:Joi.object().required().keys({
-      provinsi:Joi.string().required(),
-      kabupaten:Joi.string().required(),
-      kecamatan:Joi.string().required(),
-      kelurahan:Joi.string().required(),
-      kodepos:Joi.number().required(),
+    nik:Joi.string().required(),
+    idnegara:Joi.number().required(),
+    country:Joi.string().allow(''),
+    state:Joi.string().allow(''),
+    location:Joi.object().allow('').keys({
+      provinsi:Joi.string().allow(''),
+      kabupaten:Joi.string().allow(''),
+      kecamatan:Joi.string().allow(''),
+      kelurahan:Joi.string().allow(''),
+      kodepos:Joi.number().allow(''),
     })
   })
 

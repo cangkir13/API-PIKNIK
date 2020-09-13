@@ -5,24 +5,6 @@ const UserProfile = require('../../models/User_profile');
 const Maps = require('../../models/Area');
 const birthDay = require('is-valid-birthdate')
 
-
-const valAvatar = async(avatar) => {
-    let Split = tgl_lahir.split('/');
-    if (Split > 0 ) {
-        let data = await UserProfile.findOne({
-            where:{ avatar }
-        });
-        if (data) { 
-            return {status:false, msg:"No Tlpn Data already axist"}
-        }else{
-            return {status:true}
-        }    
-    }else{
-        return {status:false, msg:"Please enter true path/location/file.png"}
-    }
-    
-}
-
 const validateNotlp = async(no_telp) => {
     let lgthNO = no_telp.length
     
@@ -71,6 +53,16 @@ const valLocation = async(DataArea) => {
     }
 }
 
+const valLocationTuris = async(body) => {
+    if (!body.country) {
+        return {status:false, msg:"Please insert your country"}
+    } else if(!body.state) {
+        return {status:false, msg:"Please insert your states"}
+    }else{
+        return {status:true}
+    }
+}
+
 const valBirthDay = (tgl_lahir) => {
     let Split = tgl_lahir.split('/');
     
@@ -110,13 +102,17 @@ const ValidateProfile = async(body) => {
         }
     }
 
-    if (body.location ) {
-        data = await valLocation(body.location);
-        if (data.status == false) {
-            return data
-        }else{
-            return data
-        } 
+    if (body.idnegara) {
+        switch (body.idnegara) {
+            case 1:
+                return await valLocation(body.location);
+            case 2:
+                return valLocationTuris(body);
+            default:
+                break;
+        }
+        
+        
     }
     
 

@@ -16,7 +16,8 @@ const userRoutes = {
 		middlewares:[validate(schemas.registrasi)]
 	},
 
-	'GET /getProvinsi':'location/LocationCnt.GetProvinsi',
+	'GET /getProvinsi': 'location/LocationCnt.GetProvinsi',
+
 	'GET /getKabupaten': {
 		path: 'location/LocationCnt.GetKab',
 		middlewares:[validate(schemas.GetKabupaten)]
@@ -34,6 +35,13 @@ const userRoutes = {
 		path:'location/LocationCnt.GetPos',
 		middlewares:[validate(schemas.GetKodepos)]
 	},
+
+	'POST /uploadFile' : 'UploadCnt.doUpload',
+	'GET /open/:image':'UploadCnt.openFile',
+
+	'POST /DEVuploadAvatar' : 'UploadCnt.uploadAvatar',
+
+	
 };
 
 module.exports = userRoutes;
