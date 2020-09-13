@@ -2,6 +2,7 @@
  * @author
  * upload files sertifikat
  * POST /api/service/UploadVendorSertifikat (UPLOAD)
+ * GET /api/service/VendorSertifikat/:image (open file with params)
  */
 const helper = require('../../helper');
 const modelSertifikat = require('../../models/vendorImgsertifikat')
@@ -11,6 +12,20 @@ const path = require('path');
 const fs = require('fs');
 
 const VendorSertifikat = () => {
+
+    const get = async(req, res) => {
+        let image = req.params.image
+        let imageShow = path.join(__dirname, "../../../upload/sertifikat/"+image)
+        console.log(imageShow);
+        // check file is axists
+        if (fs.existsSync(imageShow)) {
+            res.sendFile(imageShow);    
+        } else {
+            res.status(404).json(
+                helper.globalRes(404, "Oops, sory file not found")
+            )
+        }
+    }
 
     const store = async(req, res) => {
         try {
@@ -37,10 +52,11 @@ const VendorSertifikat = () => {
                     }else{
                         console.log(req.files);
                         let dataFilter = req.files.map(el => {return {iduser:users.iduser, sertifikat:el.filename}})
+                        let dataIMG = req.files.map(el => {return { sertifikat:'http://localhost:8011/api/service/VendorSertifikat/'+el.filename}})
                         
                         await modelSertifikat.bulkCreate(dataFilter)
                         res.status(201).json(
-                            helper.globalRes(201, {data: dataFilter})
+                            helper.globalRes(201, {data: dataIMG})
                         )
                     }
                 }
@@ -54,6 +70,7 @@ const VendorSertifikat = () => {
 
     
     return {
+        get,
         store,
     }
 }

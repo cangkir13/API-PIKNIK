@@ -35,6 +35,7 @@ const usersRs = {
   // 'DELETE /DeleteVendorLegalitas' : 'uploads/VendorLegalitas.destroy',
 
   // fitur CRUD SERTIFIKAT VENDOR
+  'GET /VendorSertifikat/:image': 'uploads/VendorSertifikat.get',
   'POST /UploadVendorSertifikat' : 'uploads/VendorSertifikat.store',
 	
 };
