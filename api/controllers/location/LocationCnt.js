@@ -1,3 +1,14 @@
+/**
+ * @author lepek13
+ * Get master area Indonesia
+ * @method GET
+ * /api/getProvinsi (GET PROVINSI)
+ * /api/getKabupaten (GET KABUPATEN)
+ * /api/getKecamatan (GET KECAMATAN)
+ * /api/getKelurahan (GET KELURAHAN)
+ * /api/getKodepos (GET KODEPOS AND LAT LONG)
+ */
+
 const helper = require('../../helper/');
 const Area = require('../../models/Area');
 

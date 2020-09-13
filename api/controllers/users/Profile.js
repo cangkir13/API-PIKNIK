@@ -8,7 +8,7 @@ const Profile = () => {
             
             // var form = new formdata()
             // console.log(req.body);
-            let foo = await validate.valAccount(12, 'user')
+            let foo = await validate.valAccount(req.users.iduser )
             if(foo.status === false)
                 return res.status(403).json(
                     helper.globalRes(403, foo)

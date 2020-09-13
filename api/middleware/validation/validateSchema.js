@@ -51,6 +51,13 @@ const schemas = {
       kelurahan:Joi.string().allow(''),
       kodepos:Joi.number().allow(''),
     })
+  }),
+
+  RegiterUserVendor:Joi.object().keys({
+    nama_usaha:Joi.string().required(),
+    alamat_usaha:Joi.string().required(),
+    agree_term:Joi.number().max(1).required(),
+    bahasa:Joi.array().required()
   })
 
   

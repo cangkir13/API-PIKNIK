@@ -3,6 +3,11 @@
  * controller for read, upload, edit and delete file Identitas
  * modules ara model Identitas, helper reponse, 
  * middleware avata, path dir and fs for rendering file
+ * @routers
+ * POST api/service/UploaduserIdentitas (UPLOAD)
+ * GET /api/service/GetuserIdentitas (GET FILE)
+ * PUT /api/service/UpdateuserIdentitas (UPDATE FILE)
+ * DELETE /api/service/DeleteuserIdentitas (DELETE FILE)
  */
 
 const helper = require('../../helper');
@@ -37,7 +42,7 @@ const UserIdentitas = () => {
                     helper.globalRes(404, "Oops, sory file not found")
                 )
             }
-        } catch (error) {
+        } catch (err) {
             res.status(400).json(
                 helper.globalRes(400, err.message)
             )  
@@ -77,7 +82,7 @@ const UserIdentitas = () => {
                     }
                 }
             })
-        } catch (error) {
+        } catch (err) {
             res.status(400).json(
                 helper.globalRes(400, err.message)
             )
@@ -122,7 +127,7 @@ const UserIdentitas = () => {
                     }
                 }
             })
-        } catch (error) {
+        } catch (err) {
             res.status(400).json(
                 helper.globalRes(400, err.message)
             )
@@ -149,7 +154,7 @@ const UserIdentitas = () => {
             res.status(202).json(
                 helper.globalRes(202, {msg:"file has been Deleted"})
             )
-        } catch (error) {
+        } catch (err) {
             res.status(400).json(
                 helper.globalRes(400, err.message)
             )

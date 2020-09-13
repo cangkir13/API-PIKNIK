@@ -1,6 +1,7 @@
 /**
  * @author lepek13
  * register detail profile users
+ * router POST /api/service/ProfileRegis
  */
 
 const helper = require('../../helper');

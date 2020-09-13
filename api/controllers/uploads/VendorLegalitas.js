@@ -1,28 +1,28 @@
 /**
  * @author lepek13
- * controller for read, upload, edit and delete file avatar
- * modules ara model avatar, helper reponse, 
+ * controller for read, upload, edit and delete file legalitas
+ * modules ara model legalitas, helper reponse, 
  * middleware avata, path dir and fs for rendering file
  * @routers
- * POST api/service/UploaduserAvatar (UPLOAD)
- * GET /api/service/GetuserAvatar (GET FILE)
- * PUT /api/service/UpdateuserAvatar (UPDATE FILE)
- * DELETE /api/service/DeleteuserAvatar (DELETE FILE)
+ * POST api/service/UploadVendorlegalitas (UPLOAD)
+ * GET /api/service/GetVendorlegalitas (GET FILE)
+ * PUT /api/service/UpdateVendorlegalitas (UPDATE FILE)
+ * DELETE /api/service/DeleteVendorlegalitas (DELETE FILE)
  */
 
 const helper = require('../../helper');
-const modelAvatar = require('../../models/UserImgAvatar')
+const modelLegalitas = require('../../models/vendorImglegalitas')
 const serviceUpload = require('../../services/ServiceUpload');
 const validateImage = require('../../middleware/app_val/validateImage');
 const path = require('path');
 const fs = require('fs');
 
-const UserAvatar = () => {
+const VendorLegalitas = () => {
 
     const get = async(req, res) => {
         try {
             let {users} = req
-            let dataImg = await modelAvatar.findOne({
+            let dataImg = await modelLegalitas.findOne({
                 where:{iduser:users.iduser}
             })
 
@@ -33,8 +33,8 @@ const UserAvatar = () => {
             }
         
 
-            let image = dataImg.avatar
-            let imageShow = path.join(__dirname, "../../../upload/avatar/"+image)
+            let image = dataImg.legalitas
+            let imageShow = path.join(__dirname, "../../../upload/legalitas/"+image)
             
             if (fs.existsSync(imageShow)) {
                 res.sendFile(imageShow);    
@@ -43,9 +43,9 @@ const UserAvatar = () => {
                     helper.globalRes(404, "Oops, sory file not found")
                 )
             }
-        } catch (err) {
+        } catch (error) {
             res.status(400).json(
-                helper.globalRes(400, err.message)
+                helper.globalRes(400, error.message)
             )  
         }
     }
@@ -53,14 +53,15 @@ const UserAvatar = () => {
     const store = async(req, res) => {
         try {
             let {users} = req
-            let dataImge = await validateImage('avatar', users.iduser)
+            let dataImge = await validateImage('legalitas', users.iduser)
             if (dataImge.status == false) {
                 return res.status(400).json(
                     helper.globalRes(400, dataImge.msg)
                 )
             }
 
-            let dataUploads = serviceUpload('./upload/avatar/').single('avatar');
+            let dataUploads = serviceUpload('./upload/legalitas/').single('legalitas');
+            
             dataUploads(req, res, async(err) => {
                 if (err) {
                     return res.status(403).json(
@@ -73,19 +74,19 @@ const UserAvatar = () => {
                         )
                     }else{
                         
-                        await modelAvatar.create({
+                        await modelLegalitas.create({
                             iduser:users.iduser,
-                            avatar:req.file.filename
+                            legalitas:req.file.filename
                         })
                         res.status(201).json(
-                            helper.globalRes(201, {avatar:req.file.filename})
+                            helper.globalRes(201, {legalitas:req.file.filename})
                         )
                     }
                 }
             })
-        } catch (err) {
+        } catch (error) {
             res.status(400).json(
-                helper.globalRes(400, err.message)
+                helper.globalRes(400, error.message)
             )
         }
     }
@@ -94,7 +95,7 @@ const UserAvatar = () => {
         try {
             let {users} = req
             let Today = Date.now()
-            let dataImg = await modelAvatar.findOne({
+            let dataImg = await modelLegalitas.findOne({
                 where:{iduser:users.iduser}
             })
 
@@ -103,8 +104,8 @@ const UserAvatar = () => {
                     helper.globalRes(404, "Oops, sory file not found, please upload first")
                 )    
             }
-            let image = dataImg.avatar
-            let dataUploads = serviceUpload('./upload/avatar/').single('avatar');
+            let image = dataImg.legalitas
+            let dataUploads = serviceUpload('./upload/legalitas/').single('legalitas');
             dataUploads(req, res, async(err) => {
                 if (err) {
                     return res.status(403).json(
@@ -117,57 +118,57 @@ const UserAvatar = () => {
                         )
                     }else{
                         
-                        // fs.unlinkSync(path.join(__dirname, "../../../upload/avatar/"+image))
-                        await modelAvatar.update({
-                            avatar:req.file.filename,
+                        // fs.unlinkSync(path.join(__dirname, "../../../upload/legalitas/"+image))
+                        await modelLegalitas.update({
+                            legalitas:req.file.filename,
                             update_at:Today
                         }, {where:{iduser:users.iduser,}})
                         res.status(202).json(
-                            helper.globalRes(202, {avatar:req.file.filename, msg:"file has been updated"})
+                            helper.globalRes(202, {legalitas:req.file.filename, msg:"file has been updated"})
                         )
                     }
                 }
             })
-        } catch (err) {
+        } catch (error) {
             res.status(400).json(
-                helper.globalRes(400, err.message)
+                helper.globalRes(400, error.message)
             )
         }
     }
 
-    const destroy = async(req, res) => {
-        try {
-            let {users} = req
-            let dataImg = await modelAvatar.findOne({
-                where:{iduser:users.iduser}
-            })
+    // const destroy = async(req, res) => {
+    //     try {
+    //         let {users} = req
+    //         let dataImg = await modelLegalitas.findOne({
+    //             where:{iduser:users.iduser}
+    //         })
             
-            if (!dataImg) {
-                return res.status(404).json(
-                    helper.globalRes(404, "Oops, sory file not found")
-                )    
-            }
-            // let image = dataImg.avatar
-            // fs.unlinkSync(path.join(__dirname, "../../../upload/avatar/"+image))
-            await modelAvatar.destroy({
-                where:{iduser:users.iduser}
-            })
-            res.status(202).json(
-                helper.globalRes(202, {msg:"file has been Deleted"})
-            )
-        } catch (err) {
-            res.status(400).json(
-                helper.globalRes(400, err.message)
-            )
-        }
-    }
+    //         if (!dataImg) {
+    //             return res.status(404).json(
+    //                 helper.globalRes(404, "Oops, sory file not found")
+    //             )    
+    //         }
+    //         // let image = dataImg.legalitas
+    //         // fs.unlinkSync(path.join(__dirname, "../../../upload/legalitas/"+image))
+    //         await modelLegalitas.destroy({
+    //             where:{iduser:users.iduser}
+    //         })
+    //         res.status(202).json(
+    //             helper.globalRes(202, {msg:"file has been Deleted"})
+    //         )
+    //     } catch (error) {
+    //         res.status(400).json(
+    //             helper.globalRes(400, err.message)
+    //         )
+    //     }
+    // }
 
     return {
         get,
         store,
         put,
-        destroy,
+        // destroy,
     }
 }
 
-module.exports = UserAvatar
+module.exports = VendorLegalitas

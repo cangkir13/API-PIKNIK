@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
 
-const table_avatar = 'User_img_avatar';
+const tbl = 'master_bahasa';
 
-const User_img_avatar = sequelize.define('user_img_avatar', {
-  iduser: {
+const master_bahasa = sequelize.define('master_bahasa', {
+  id_bahasa: {
     type: Sequelize.INTEGER,
     primaryKey: true,
   },
-  avatar:{
+  bahasa:{
     type:Sequelize.STRING,
   },
   update_at:{
@@ -16,7 +16,7 @@ const User_img_avatar = sequelize.define('user_img_avatar', {
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   }
 
-}, {  table_avatar, timestamps:false, freezeTableName:true });
+}, {  tbl, timestamps:false, freezeTableName:true });
 
 
-module.exports = User_img_avatar;
+module.exports = master_bahasa;

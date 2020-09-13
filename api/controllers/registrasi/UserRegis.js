@@ -2,6 +2,7 @@
  * @author lepek13
  * register user for first stap
  * register email and password
+ * router POST api/register 
  */
 
 const helper = require('../../helper/');

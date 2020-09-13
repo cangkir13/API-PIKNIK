@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
 
-const table_identitas = 'User_identitas';
+const table_identitas = 'User_img_identitas';
 
-const User_identitas = sequelize.define('user_identitas', {
+const User_img_identitas = sequelize.define('user_img_identitas', {
   iduser: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -19,4 +19,4 @@ const User_identitas = sequelize.define('user_identitas', {
 }, {  table_identitas, timestamps:false, freezeTableName:true });
 
 
-module.exports = User_identitas;
+module.exports = User_img_identitas;
