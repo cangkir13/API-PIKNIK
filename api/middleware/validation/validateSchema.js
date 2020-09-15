@@ -58,7 +58,24 @@ const schemas = {
     alamat_usaha:Joi.string().required(),
     agree_term:Joi.number().max(1).required(),
     bahasa:Joi.array().required()
-  })
+  }),
+
+  create_product_vendor:Joi.object().keys({
+    name_piknik:Joi.string().required(),
+    keterangan:Joi.string().required(),
+    idkategori:Joi.array().required(),
+  }),
+
+  update_product_vendor:Joi.object().keys({
+    kode:Joi.string().required(),
+    name_piknik:Joi.string().required(),
+    keterangan:Joi.string().required(),
+  }),
+
+  add_kategori_trip:Joi.object().keys({
+    kode:Joi.string().required(),
+    idkategori:Joi.array().required(),
+  }),
 
   
   // define all the other schemas below 
