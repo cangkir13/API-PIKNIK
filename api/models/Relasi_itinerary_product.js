@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
 
-const tbl = 'relasi_itenerary_product';
+const tbl = 'relasi_itinerary_product';
 
-const relasi_itenerary_product = sequelize.define('relasi_itenerary_product', {
+const relasi_itinerary_product = sequelize.define('relasi_itinerary_product', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -36,4 +36,4 @@ const relasi_itenerary_product = sequelize.define('relasi_itenerary_product', {
 }, {  tbl, timestamps:false, freezeTableName:true });
 
 
-module.exports = relasi_itenerary_product;
+module.exports = relasi_itinerary_product;

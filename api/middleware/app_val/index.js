@@ -3,7 +3,8 @@ const valProfile = require('./validateProfile');
 const valAccount = require('./ValidateUserVerify');
 const valAccountVendor = require('./ValidateVendorVerify');
 const valBhsVendor = require('./ValidateBahasa');
-const valKategori = require('./ValidateKategori')
+const valKategori = require('./ValidateKategori');
+const valFasilProd = require('./ValFasilProd');
 
 const Validation = {
     valEmail,
@@ -12,6 +13,7 @@ const Validation = {
     valAccountVendor,
     valBhsVendor,
     valKategori,
+    valFasilProd,
 }
 
 module.exports = Validation

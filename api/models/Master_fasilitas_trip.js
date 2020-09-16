@@ -4,12 +4,12 @@ const sequelize = require('../../config/database');
 const tbl = 'master_fasilitas_trip';
 
 const master_fasilitas_trip = sequelize.define('master_fasilitas_trip', {
-  id: {
+  id_fasilitas: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  name:{
+  fasilitas_name:{
     type:Sequelize.STRING,
   },
   create_at:{
