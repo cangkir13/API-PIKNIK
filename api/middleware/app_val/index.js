@@ -5,6 +5,7 @@ const valAccountVendor = require('./ValidateVendorVerify');
 const valBhsVendor = require('./ValidateBahasa');
 const valKategori = require('./ValidateKategori');
 const valFasilProd = require('./ValFasilProd');
+const valDetailProd = require('./ValidateDetailProduct');
 
 const Validation = {
     valEmail,
@@ -14,6 +15,7 @@ const Validation = {
     valBhsVendor,
     valKategori,
     valFasilProd,
+    valDetailProd
 }
 
 module.exports = Validation

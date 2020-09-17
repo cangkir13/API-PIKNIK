@@ -16,7 +16,7 @@ const UserProfile = () => {
             const {iduser} = req.users
             
             let validationUser = await Validate.valProfile(body)
-            console.log(validationUser);
+            // console.log(validationUser);
             
             if ( validationUser.status == false ) {
                 return res.status(422).json(helper.globalRes(
@@ -30,7 +30,7 @@ const UserProfile = () => {
                 ))
             }  else{
                 let indo = (!validationUser.data)?null:validationUser.data.idlocation;
-                console.log(indo);
+                // console.log(indo);
                 
                 await Profileuser.create({
                     fullname:body.fullname,

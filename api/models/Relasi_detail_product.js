@@ -36,7 +36,7 @@ const relasi_detail_product = sequelize.define('relasi_detail_product', {
   },
   update_at:{
     type: Sequelize.DATE,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    // defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   },
 
 }, {  tbl, timestamps:false, freezeTableName:true });

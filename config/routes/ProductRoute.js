@@ -24,14 +24,21 @@ const ProductRoute = {
     path:'product_vendor/Product_facility.getFaslitas'
   },
 
+  /* add list of fasility */
   'POST /addFasility': {
     path:'product_vendor/Product_facility.StoreFasilitas',
     middlewares:[validate(schemas.add_fasilitas)]
   },
 
+  /* add fasilitas of product/trip */
   'POST /addFasilityTrip': {
     path:'product_vendor/Product_facility.StoreFasilitasProduct',
     middlewares:[validate(schemas.add_fasilitas_trip)]
+  },
+
+  'POST /addDetailTrip': {
+    path:'product_vendor/Product_detail.StDetailProd',
+    middlewares:[validate(schemas.add_detail_trip)]
   },
 
 	
