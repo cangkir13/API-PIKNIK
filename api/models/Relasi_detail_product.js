@@ -4,13 +4,13 @@ const sequelize = require('../../config/database');
 const tbl = 'relasi_detail_product';
 
 const relasi_detail_product = sequelize.define('relasi_detail_product', {
-  id_detail: {
-    type: Sequelize.INTEGER,
+  code_detail:{
+    type:Sequelize.STRING,
     primaryKey: true,
-    autoIncrement: true,
   },
   id_product: {
     type: Sequelize.INTEGER,
+    primaryKey: true,
   },
   idlocation: {
     type: Sequelize.INTEGER,
@@ -23,6 +23,9 @@ const relasi_detail_product = sequelize.define('relasi_detail_product', {
   },
   price:{
     type:Sequelize.FLOAT,
+  },
+  terms_conditions:{
+    type:Sequelize.STRING,
   },
   tgl_berangkat:{
     type: Sequelize.DATE,

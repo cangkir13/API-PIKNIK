@@ -41,6 +41,15 @@ const ProductRoute = {
     middlewares:[validate(schemas.add_detail_trip)]
   },
 
+  'POST /addRundowns' : {
+    path:'product_vendor/Product_itinerary.createRundowns',
+    middlewares:[validate(schemas.add_Rundowns_trip)]
+  },
+
+  'GET /DataTrip': {
+    path:'product_vendor/Product_detail.GetDetailProd'
+  },
+
 	
 };
 

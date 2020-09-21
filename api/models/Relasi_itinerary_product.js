@@ -9,8 +9,8 @@ const relasi_itinerary_product = sequelize.define('relasi_itinerary_product', {
         primaryKey: true,
         autoIncrement: true,
     },
-    id_product: {
-        type: Sequelize.INTEGER,
+    code_detail: {
+        type: Sequelize.STRING,
     },
     judul_acara:{
         type:Sequelize.STRING,

@@ -34,6 +34,7 @@ const schemas = {
         kuota:Joi.number().required(),
         price:Joi.number().required(),
         start_point:Joi.string().required(),
+        terms_conditions:Joi.string().required(),
         location:Joi.object().required().keys({
             provinsi:Joi.string().required(),
             kabupaten:Joi.string().required(),
@@ -41,6 +42,14 @@ const schemas = {
             kelurahan:Joi.string().required(),
             kodepos:Joi.number().required(),
         }),
+    }),
+
+    add_Rundowns_trip:Joi.object().keys({
+        code_detail:Joi.string().required(),
+        judul_acara:Joi.string().required(),
+        tgl_mulai:Joi.string().required(),
+        tgl_akhir:Joi.string().required(),
+        keterangan:Joi.string().required(),
     }),
 }
 
