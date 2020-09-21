@@ -55,7 +55,9 @@ const Product_detail = () => {
                 helper.globalRes(200, {detailPost, location:val.data})
             )
         } catch (error) {
-            
+            return res.status(500).json(
+                helper.globalRes(500, error.message)
+            )
         }
     }
     

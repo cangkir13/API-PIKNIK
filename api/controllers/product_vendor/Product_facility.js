@@ -55,41 +55,47 @@ const Product_facility = () => {
 
     /* api/trip/addFasilityTrip */
     const StoreFasilitasProduct = async(req, res) => {
-        const {body, users} = req
-        const {fasilitas, kode} = body
-        const {iduser} = users
+        try {
+            const {body, users} = req
+            const {fasilitas, kode} = body
+            const {iduser} = users
 
-        /* find and check product trip */
-        let findKode = await productTrip.findOne({
-            where:{kode, iduser}
-        });
+            /* find and check product trip */
+            let findKode = await productTrip.findOne({
+                where:{kode, iduser}
+            });
 
-        if (!findKode) {
-            return res.status(404).json(
-                helper.globalRes(404, {msg:"Trip not found"})
+            if (!findKode) {
+                return res.status(404).json(
+                    helper.globalRes(404, {msg:"Trip not found"})
+                )
+            }
+
+            /* compare and check fasilitas id */
+            let valFasil = await validate.valFasilProd(fasilitas);
+
+            if (valFasil.status == false) {
+                return res.status(403).json(
+                    helper.globalRes(403, valFasil.msg)
+                )
+            }
+
+            /* map array insert */
+            let productFsilPost = fasilitas.map((el) => {
+                return {id_product:findKode.id_piknik, id_fasilitas:el}
+            })
+
+            /* insert fasility of trip */
+            await productFasility.bulkCreate(productFsilPost)
+
+            return res.json(
+                helper.globalRes(200, {findKode, productFsilPost})
+            )
+        } catch (error) {
+            return res.status(500).json(
+                helper.globalRes(500, error.message)
             )
         }
-
-        /* compare and check fasilitas id */
-        let valFasil = await validate.valFasilProd(fasilitas);
-
-        if (valFasil.status == false) {
-            return res.status(403).json(
-                helper.globalRes(403, valFasil.msg)
-            )
-        }
-
-        /* map array insert */
-        let productFsilPost = fasilitas.map((el) => {
-            return {id_product:findKode.id_piknik, id_fasilitas:el}
-        })
-
-        /* insert fasility of trip */
-        await productFasility.bulkCreate(productFsilPost)
-
-        return res.json(
-            helper.globalRes(200, {findKode, productFsilPost})
-        )
     }
 
     return {
