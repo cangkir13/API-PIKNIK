@@ -6,7 +6,7 @@ const JWTservise = require('./JwtService');
 module.exports = async(req, res, next) => {
     let client_code = req.header('Client_code');
     let Authorization = req.header('Authorization');
-    console.log(client_code);
+    // console.log(client_code);
     
     // token payload
     let tokenVerify;

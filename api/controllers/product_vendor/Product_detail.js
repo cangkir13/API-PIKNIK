@@ -16,7 +16,9 @@ const Product_detail = () => {
         try {
             const {body, users} = req
             const {kode, kuota, start_point, price,
-                tgl_berangkat, tgl_pulang, terms_conditions} = body
+                tgl_berangkat, tgl_pulang, terms_conditions,
+                point_lat, point_long, close_order,
+            } = body
             const {iduser} = users
 
             /* find and check product trip */
@@ -41,13 +43,16 @@ const Product_detail = () => {
             let detailPost = {
                 id_product : findKode.id_piknik,
                 idlocation : val.data.idlocation,
-                code_detail: helper.genCode(30),
+                iduser: users.iduser,
                 kuota,
                 price,
                 start_point,
                 tgl_berangkat:moment(tgl_berangkat, 'YYYY/MM/DD HH:mm'), 
                 tgl_pulang:moment(tgl_pulang, 'YYYY/MM/DD HH:mm'),
-                terms_conditions
+                close_order:moment(close_order, 'YYYY/MM/DD HH:mm'),
+                terms_conditions,
+                point_lat,
+                point_long,
             }
 
             await productDetail.create(detailPost)

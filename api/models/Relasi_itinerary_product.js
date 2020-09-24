@@ -9,8 +9,8 @@ const relasi_itinerary_product = sequelize.define('relasi_itinerary_product', {
         primaryKey: true,
         autoIncrement: true,
     },
-    code_detail: {
-        type: Sequelize.STRING,
+    id_detail: {
+        type: Sequelize.INTEGER,
     },
     judul_acara:{
         type:Sequelize.STRING,
@@ -31,6 +31,9 @@ const relasi_itinerary_product = sequelize.define('relasi_itinerary_product', {
     update_at:{
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    },
+    iduser:{
+        type: Sequelize.INTEGER,
     },
   
 }, {  tbl, timestamps:false, freezeTableName:true });

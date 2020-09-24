@@ -46,6 +46,11 @@ const ProductRoute = {
     middlewares:[validate(schemas.add_Rundowns_trip)]
   },
 
+  'PUT /editRundowns' : {
+    path:'product_vendor/Product_itinerary.updateRundowns',
+    middlewares:[validate(schemas.edit_Rundowns_trip)]
+  },
+
   'GET /DataTrip': {
     path:'product_vendor/Product_detail.GetDetailProd'
   },

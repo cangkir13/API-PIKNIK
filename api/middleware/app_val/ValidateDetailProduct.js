@@ -1,10 +1,18 @@
 const masterLoc = require('../../models/Area');
 const moment = require('moment');
 const todayDate = moment(Date.now()).format('YYYY/MM/DD');
-const DateMin = moment(todayDate, 'YYYY/MM/DD').add('days', 10);
 
 const validateTGLForm = (body) => {
     
+    // console.log(!body.close_order );
+    if (body.close_order) {
+        // console.log("ada", true );
+        let formtClose = moment(body.close_order, 'YYYY/MM/DD HH:mm', true);
+        if (formtClose.isValid() === false) {
+            return {status: false, msg: "the format of close_order must be YYYY/MM/DD HH:mm"}
+        }
+    }
+
     let formtTglBrkt = moment(body.tgl_berangkat, 'YYYY/MM/DD HH:mm', true);
     let formtTglPlg = moment(body.tgl_pulang, 'YYYY/MM/DD HH:mm', true);
     
@@ -12,15 +20,8 @@ const validateTGLForm = (body) => {
         return {status: false, msg: "the format of tgl_berangkat / tgl_pulang must be YYYY/MM/DD HH:mm"}
     }
 
-    /* cek tgl_berangakat >= 10+ */
-    let isAfterMin = moment(body.tgl_berangkat, 'YYYY/MM/DD').isAfter(DateMin, true)
-    
-    if (!isAfterMin ) {
-        return {status:false, msg:"the date of tgl_berangkat at least 10 days ahead and must not be below today's date"}
-    }
-
     /* cek tgl_berangakat > tgl_pulang */
-    let isAfterPlg = moment(body.tgl_pulang, 'YYYY/MM/DD').isAfter(moment(body.tgl_berangkat, 'YYYY/MM/DD' ))
+    let isAfterPlg = moment(body.tgl_pulang, 'YYYY/MM/DD HH:mm').isAfter(moment(body.tgl_berangkat, 'YYYY/MM/DD HH:mm' ))
 
     if (!isAfterPlg ) {
         return {status:false, msg:"the date of tgl_pulang must be greater than tgl_berangkat"}

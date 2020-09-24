@@ -1,3 +1,6 @@
+const moment = require('moment');
+moment.locale('Indonesian')
+const DateMin = moment().add({days:10}).format('YYYY/MM/DD');
 const Joi = require('@hapi/joi')
 
 const schemas = { 
@@ -27,13 +30,17 @@ const schemas = {
         fasilitas:Joi.array().required()
     }),
 
+    // trip schedule
     add_detail_trip:Joi.object().keys({
         kode:Joi.string().required(),
-        tgl_berangkat:Joi.string().required(),
-        tgl_pulang:Joi.string().required(),
+        tgl_berangkat: Joi.date().min(DateMin).required(),
+        tgl_pulang:Joi.date().greater(Joi.ref('tgl_berangkat')).required(),
+        close_order:Joi.date().less(Joi.ref('tgl_berangkat')).required(),
         kuota:Joi.number().required(),
         price:Joi.number().required(),
         start_point:Joi.string().required(),
+        point_lat:Joi.number().required(),
+        point_long:Joi.number().required(),
         terms_conditions:Joi.string().required(),
         location:Joi.object().required().keys({
             provinsi:Joi.string().required(),
@@ -45,10 +52,18 @@ const schemas = {
     }),
 
     add_Rundowns_trip:Joi.object().keys({
-        code_detail:Joi.string().required(),
+        code_detail:Joi.number().required(),
         judul_acara:Joi.string().required(),
-        tgl_mulai:Joi.string().required(),
-        tgl_akhir:Joi.string().required(),
+        tgl_mulai:Joi.date().required(),
+        tgl_akhir:Joi.date().greater(Joi.ref('tgl_mulai')).required(),
+        keterangan:Joi.string().required(),
+    }),
+
+    edit_Rundowns_trip:Joi.object().keys({
+        id:Joi.number().required(),
+        judul_acara:Joi.string().required(),
+        tgl_mulai:Joi.date().required(),
+        tgl_akhir:Joi.date().greater(Joi.ref('tgl_mulai')).required(),
         keterangan:Joi.string().required(),
     }),
 }
