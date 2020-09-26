@@ -40,8 +40,6 @@ const validateImageType = async(type, id) => {
             return await userIdentitas(id)
         case 'legalitas':
             return await vendorLegalitas(id)
-        case 'sertifikat':    
-            return await vendorSertifikat(id)
         default:
 
             return {status:false, msg:'args are (type, id)'}

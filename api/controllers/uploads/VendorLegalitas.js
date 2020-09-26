@@ -19,6 +19,25 @@ const fs = require('fs');
 
 const VendorLegalitas = () => {
 
+    const getlegalitas = async(req, res) => {
+        try {
+            let image = req.params.img
+            let imageShow = path.join(__dirname, "../../../upload/legalitas/"+image)
+            
+            if (fs.existsSync(imageShow)) {
+                res.sendFile(imageShow);    
+            } else {
+                res.status(404).json(
+                    helper.globalRes(404, "Oops, sory file not found")
+                )
+            }
+        } catch (error) {
+            res.status(400).json(
+                helper.globalRes(400, err.message)
+            )  
+        }
+    }
+
     const get = async(req, res) => {
         try {
             let {users} = req
@@ -79,7 +98,7 @@ const VendorLegalitas = () => {
                             legalitas:req.file.filename
                         })
                         res.status(201).json(
-                            helper.globalRes(201, {legalitas:req.file.filename})
+                            helper.globalRes(201, {legalitas:'http://localhost:8011/legalitas/'+req.file.filename})
                         )
                     }
                 }
@@ -164,6 +183,7 @@ const VendorLegalitas = () => {
     // }
 
     return {
+        getlegalitas,
         get,
         store,
         put,

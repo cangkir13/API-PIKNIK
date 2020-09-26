@@ -19,6 +19,25 @@ const fs = require('fs');
 
 const UserAvatar = () => {
 
+    const getAvatar = async(req, res) => {
+        try {
+            let image = req.params.img
+            let imageShow = path.join(__dirname, "../../../upload/avatar/"+image)
+            
+            if (fs.existsSync(imageShow)) {
+                res.sendFile(imageShow);    
+            } else {
+                res.status(404).json(
+                    helper.globalRes(404, "Oops, sory file not found")
+                )
+            }
+        } catch (error) {
+            res.status(400).json(
+                helper.globalRes(400, err.message)
+            )  
+        }
+    }
+
     const get = async(req, res) => {
         try {
             let {users} = req
@@ -78,7 +97,7 @@ const UserAvatar = () => {
                             avatar:req.file.filename
                         })
                         res.status(201).json(
-                            helper.globalRes(201, {avatar:req.file.filename})
+                            helper.globalRes(201, {avatar:"http://localhost:8011/avatar/"+req.file.filename})
                         )
                     }
                 }
@@ -163,6 +182,7 @@ const UserAvatar = () => {
     }
 
     return {
+        getAvatar,
         get,
         store,
         put,

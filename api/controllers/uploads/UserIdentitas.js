@@ -19,6 +19,25 @@ const fs = require('fs');
 
 const UserIdentitas = () => {
 
+    const getidentitas = async(req, res) => {
+        try {
+            let image = req.params.img
+            let imageShow = path.join(__dirname, "../../../upload/identitas/"+image)
+            
+            if (fs.existsSync(imageShow)) {
+                res.sendFile(imageShow);    
+            } else {
+                res.status(404).json(
+                    helper.globalRes(404, "Oops, sory file not found")
+                )
+            }
+        } catch (error) {
+            res.status(400).json(
+                helper.globalRes(400, err.message)
+            )  
+        }
+    }
+
     const get = async(req, res) => {
         try {
             let {users} = req
@@ -77,7 +96,7 @@ const UserIdentitas = () => {
                             identitas:req.file.filename
                         })
                         res.status(201).json(
-                            helper.globalRes(201, {identitas:req.file.filename})
+                            helper.globalRes(201, {identitas:"http://localhost:8011/indentitas/"+req.file.filename})
                         )
                     }
                 }
@@ -162,6 +181,7 @@ const UserIdentitas = () => {
     }
 
     return {
+        getidentitas,
         get,
         store,
         put,

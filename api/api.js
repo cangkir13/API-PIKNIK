@@ -45,7 +45,8 @@ const server = http.Server(app);
 // const mappedUserRoutes = mapRoutes(config.userRoutes, 'api/controllers/', validatePolicy().requiredHeaders);
 const mappedUserRoutes = mapRoutes(config.userRoutes, 'api/controllers/');
 const mappedUserRs = mapRoutes(config.usersRs, 'api/controllers/');
-const mappedProductVnd = mapRoutes(config.ProductRoute, 'api/controllers/')
+const mappedProductVnd = mapRoutes(config.ProductRoute, 'api/controllers/');
+const mappedIMG = mapRoutes(config.imgRoute, 'api/controllers/uploads/');
 
 
 /**
@@ -64,7 +65,7 @@ app.use(helmet({
 }));
 
 // parsing body request
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(upload.array());
 app.use(bodyParser.json());
 
@@ -76,6 +77,8 @@ app.all('/api/trip/*',  (req, res, next) => AuthUser(req, res, next));
 app.use('/api', mappedUserRoutes);
 app.use('/api/service', mappedUserRs);
 app.use('/api/trip', mappedProductVnd);
+
+app.use('/', mappedIMG);
 
 
 server.listen(config.port, () => {

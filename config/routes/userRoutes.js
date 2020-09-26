@@ -40,7 +40,6 @@ const userRoutes = {
 	'GET /open/:image':'UploadCnt.openFile',
 
 	'POST /DEVuploadAvatar' : 'UploadCnt.uploadAvatar',
-
 	
 };
 

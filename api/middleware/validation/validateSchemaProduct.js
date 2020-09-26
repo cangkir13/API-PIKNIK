@@ -66,6 +66,7 @@ const schemas = {
         tgl_akhir:Joi.date().greater(Joi.ref('tgl_mulai')).required(),
         keterangan:Joi.string().required(),
     }),
+
 }
 
 module.exports = schemas

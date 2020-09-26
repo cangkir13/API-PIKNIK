@@ -51,9 +51,14 @@ const ProductRoute = {
     middlewares:[validate(schemas.edit_Rundowns_trip)]
   },
 
-  'GET /DataTrip': {
-    path:'product_vendor/Product_detail.GetDetailProd'
+  'POST /UploadImgTrip' : {
+    path:'uploads/ProductImg.store',
+    // middlewares:[validate(schemas.upload_img_trip)]
   },
+
+  // 'GET /DataTrip': {
+  //   path:'uploads/ProductImg.store'
+  // },
 
 	
 };

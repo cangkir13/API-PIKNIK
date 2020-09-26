@@ -7,6 +7,7 @@ const valKategori = require('./ValidateKategori');
 const valFasilProd = require('./ValFasilProd');
 const valDetailProd = require('./ValidateDetailProduct');
 const valRundowns = require('./ValidateRundowns');
+const valImgProd = require('./validateImgProd')
 
 const Validation = {
     valEmail,
@@ -17,7 +18,8 @@ const Validation = {
     valKategori,
     valFasilProd,
     valDetailProd,
-    valRundowns
+    valRundowns,
+    valImgProd,
 }
 
 module.exports = Validation

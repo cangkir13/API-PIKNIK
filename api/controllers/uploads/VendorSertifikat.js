@@ -7,17 +7,20 @@
 const helper = require('../../helper');
 const modelSertifikat = require('../../models/vendorImgsertifikat')
 const serviceUpload = require('../../services/ServiceUpload');
-const validateImage = require('../../middleware/app_val/validateImage');
+const validateImage = require('../../middleware/app_val/validateImgSertifikat');
 const path = require('path');
 const fs = require('fs');
+
+// delete file array
+const delImg = (arrayImg) => {
+    return arrayImg.map(el => fs.unlinkSync(el.destination+el.filename))    
+}
 
 const VendorSertifikat = () => {
 
     const get = async(req, res) => {
-        let image = req.params.image
+        let image = req.params.img
         let imageShow = path.join(__dirname, "../../../upload/sertifikat/"+image)
-        console.log(imageShow);
-        // check file is axists
         if (fs.existsSync(imageShow)) {
             res.sendFile(imageShow);    
         } else {
@@ -30,12 +33,6 @@ const VendorSertifikat = () => {
     const store = async(req, res) => {
         try {
             let {users} = req
-            let dataImge = await validateImage('sertifikat', users.iduser)
-            if (dataImge.status == false) {
-                return res.status(400).json(
-                    helper.globalRes(400, dataImge.msg)
-                )
-            }
 
             let dataUploads = serviceUpload('./upload/sertifikat/').array('sertifikat');
             
@@ -45,18 +42,27 @@ const VendorSertifikat = () => {
                         helper.globalRes(403, err)
                     )
                 } else {
+                    console.log(req.files);
                     if (req.files.length < 1 || req.files.length > 3 ) {
+                        delImg(req.files)  
                         res.status(403).json(
                             helper.globalRes(403, "Please insert file min 1 and max 3")
                         )
                     }else{
-                        console.log(req.files);
+                        let dataImge = await validateImage(users.iduser, req.files.length)
+                        if (dataImge.status == false) {                
+                            delImg(req.files)  
+                            return res.status(400).json(
+                                helper.globalRes(400, dataImge.msg)
+                            )
+                        }
+                        // console.log(req.files);
                         let dataFilter = req.files.map(el => {return {iduser:users.iduser, sertifikat:el.filename}})
-                        let dataIMG = req.files.map(el => {return { sertifikat:'http://localhost:8011/api/service/VendorSertifikat/'+el.filename}})
+                        let dataIMG = req.files.map(el => {return { sertifikat:'http://localhost:8011/sertifikat/'+el.filename}})
                         
                         await modelSertifikat.bulkCreate(dataFilter)
                         res.status(201).json(
-                            helper.globalRes(201, {data: dataIMG})
+                            helper.globalRes(201,  dataIMG)
                         )
                     }
                 }
