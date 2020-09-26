@@ -1,3 +1,4 @@
+const Mkategori = require('./Master_kategori_wisata');
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
 
@@ -15,5 +16,6 @@ const relasi_kategori_product = sequelize.define('relasi_kategori_product', {
   
 }, {  tbl, timestamps:false, freezeTableName:true });
 
+relasi_kategori_product.hasMany(Mkategori, {foreignKey:"id", otherKey:"id_kategori"})
 
 module.exports = relasi_kategori_product;

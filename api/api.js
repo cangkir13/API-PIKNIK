@@ -47,6 +47,7 @@ const mappedUserRoutes = mapRoutes(config.userRoutes, 'api/controllers/');
 const mappedUserRs = mapRoutes(config.usersRs, 'api/controllers/');
 const mappedProductVnd = mapRoutes(config.ProductRoute, 'api/controllers/');
 const mappedIMG = mapRoutes(config.imgRoute, 'api/controllers/uploads/');
+const mappedContent = mapRoutes(config.Content, 'api/controllers/content/');
 
 
 /**
@@ -79,6 +80,7 @@ app.use('/api/service', mappedUserRs);
 app.use('/api/trip', mappedProductVnd);
 
 app.use('/', mappedIMG);
+app.use('/content/', mappedContent);
 
 
 server.listen(config.port, () => {

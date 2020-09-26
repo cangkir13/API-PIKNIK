@@ -1,3 +1,6 @@
+const MrelasiKategori = require('./Relasi_kategori_product');
+const MrelasiFasil = require('./Relasi_fasilitas_product');
+const MrelasiDetail = require('./Relasi_detail_product');
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
 
@@ -30,6 +33,15 @@ const product_trip_vendor = sequelize.define('product_trip_vendor', {
   },
 
 }, {  tbl, timestamps:false, freezeTableName:true });
+
+product_trip_vendor.hasMany(MrelasiKategori, {foreignKey:"id_product"});
+product_trip_vendor.hasMany(MrelasiFasil, {foreignKey:"id_product"});
+product_trip_vendor.hasMany(MrelasiDetail, {foreignKey:"id_product"});
+
+// product_trip_vendor.belongsToMany(MrelasiKategori, {foreignKey:"id_product", through: Mkategori })
+// product_trip_vendor.belongsToMany(MrelasiFasil, {foreignKey:"id_product", through: product_trip_vendor })
+// MrelasiKategori.hasOne(Mkategori, {as:"id_kategori"})
+// product_trip_vendor.belongsToMany(MrelasiKategori, { through: 'master_kategori_wisata' })
 
 
 module.exports = product_trip_vendor;

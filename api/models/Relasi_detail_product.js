@@ -1,3 +1,4 @@
+const Marea = require('./Area');
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
 
@@ -57,5 +58,5 @@ const relasi_detail_product = sequelize.define('relasi_detail_product', {
 
 }, {  tbl, timestamps:false, freezeTableName:true });
 
-
+relasi_detail_product.hasOne(Marea, {foreignKey:"idlocation", otherKey:"idlocation"})
 module.exports = relasi_detail_product;
