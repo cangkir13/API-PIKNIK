@@ -11,14 +11,18 @@ const Mdetail = require('../../models/Relasi_detail_product');
 const Marea = require('../../models/Area');
 
 const { Op } = require('sequelize')
-const moment = require('moment')
+const moment = require('moment');
+const { of } = require('core-js/fn/array');
 
 const product_trip = () => {
     const getContent = async(req, res) => {
-        console.log(moment().toDate());
+        
+        const {limit, offset} = req.query
+        
+        let limits = limit?  parseInt(limit) :10
+        let offsets = offset? parseInt(offset): 0
         
         let Trip = await MTrip.findAll({
-            // where:{id_piknik:3},
             attributes: [['id_piknik','id_product'], 'kode', 'name_piknik', 'keterangan', 'iduser'],
             include:[
                 {
@@ -29,7 +33,9 @@ const product_trip = () => {
                             [Op.gte]: moment().toDate()
                         }
                     },
-                    include:[Marea]
+                    // separate: true,
+                    
+                    include:[Marea],                   
                 },
                 {
                     model:relasiKategori,
@@ -46,12 +52,18 @@ const product_trip = () => {
                         model:Mfasil,
                         attributes:['fasilitas_name'],
                     }]
-                }
+                },
             ],
+            offset:offsets,
+            limit:limits,
         });
 
+        let pages = {
+            limit:limits,
+            offset:offsets,
+        }
         return res.json(
-            helper.globalRes(200, Trip)
+            helper.globalRes(200, {pages, data:Trip})
         )
         
     }
