@@ -1,4 +1,9 @@
 const Marea = require('./Area');
+const Mtrip = require('./Product_trip_vendor');
+const MrelasiKategori = require('./Relasi_kategori_product')
+const relasi_kategori_product = require('./Relasi_kategori_product');
+const Rundowns = require('./Relasi_itinerary_product')
+
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
 
@@ -15,7 +20,6 @@ const relasi_detail_product = sequelize.define('relasi_detail_product', {
   },
   id_product: {
     type: Sequelize.INTEGER,
-    primaryKey: true,
   },
   idlocation: {
     type: Sequelize.INTEGER,
@@ -58,5 +62,9 @@ const relasi_detail_product = sequelize.define('relasi_detail_product', {
 
 }, {  tbl, timestamps:false, freezeTableName:true });
 
-relasi_detail_product.hasOne(Marea, {foreignKey:"idlocation", otherKey:"idlocation"})
+Mtrip.hasMany(relasi_detail_product, {foreignKey:'id_product'});
+relasi_detail_product.belongsTo(Mtrip, {foreignKey:'id_product',  as: 'Product', constraints: false });
+
+relasi_detail_product.hasMany(Rundowns, {foreignKey:'id_detail', as:'DetailRundowns'})
+
 module.exports = relasi_detail_product;

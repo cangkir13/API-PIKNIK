@@ -80,7 +80,7 @@ app.use('/api/service', mappedUserRs);
 app.use('/api/trip', mappedProductVnd);
 
 app.use('/', mappedIMG);
-app.use('/content/', mappedContent);
+app.use('/trip', mappedContent);
 
 
 server.listen(config.port, () => {

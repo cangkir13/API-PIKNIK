@@ -82,7 +82,7 @@ const Product_facility = () => {
 
             /* map array insert */
             let productFsilPost = fasilitas.map((el) => {
-                return {id_product:findKode.id_piknik, id_fasilitas:el}
+                return {id_product:findKode.id_product, id_fasilitas:el}
             })
 
             /* insert fasility of trip */

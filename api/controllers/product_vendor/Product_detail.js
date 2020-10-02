@@ -41,7 +41,7 @@ const Product_detail = () => {
                 )
             
             let detailPost = {
-                id_product : findKode.id_piknik,
+                id_product : findKode.id_product,
                 idlocation : val.data.idlocation,
                 iduser: users.iduser,
                 kuota,
@@ -91,7 +91,7 @@ const Product_detail = () => {
 
     const GetDetailProd = async(req, res) => {
         let sequel = require('../../../config/database')
-        let query = "SELECT * FROM product_trip_vendor a JOIN relasi_detail_product b ON a.id_piknik = b.id_product";
+        let query = "SELECT * FROM product_trip_vendor a JOIN relasi_detail_product b ON a.id_product = b.id_product";
     
         sequel.query(query, {
             type:sequel.QueryTypes.SELECT

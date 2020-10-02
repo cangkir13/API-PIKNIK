@@ -16,6 +16,6 @@ const relasi_kategori_product = sequelize.define('relasi_kategori_product', {
   
 }, {  tbl, timestamps:false, freezeTableName:true });
 
-relasi_kategori_product.hasMany(Mkategori, {foreignKey:"id", otherKey:"id_kategori"})
+relasi_kategori_product.belongsTo(Mkategori, {foreignKey:'id_kategori', as:'KategoriProduct'})
 
 module.exports = relasi_kategori_product;

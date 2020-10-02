@@ -79,7 +79,7 @@ const ProductImg = () => {
 
                 let post = req.files.map(el => {
                     return {
-                        gambar:"http://localhost:8011/imgProduct/"+el.destination+el.filename,
+                        gambar:el.filename,
                         judul:el.filename,
                         id_product:req.body.id_product,
                         iduser:users.iduser

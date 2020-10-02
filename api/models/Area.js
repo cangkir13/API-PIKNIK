@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
+const Mdetail = require('./Relasi_detail_product');
 
 const tbl = 'master_area';
 const MasterArea = sequelize.define('master_area', {
@@ -32,5 +33,7 @@ const MasterArea = sequelize.define('master_area', {
  
 }, { tbl, timestamps:false, freezeTableName:true });
 
+MasterArea.hasMany(Mdetail, {foreignKey:'idlocation'});
+Mdetail.belongsTo(MasterArea, {foreignKey:'idlocation',  as: 'DetailLocation', constraints: false })
 
 module.exports = MasterArea;

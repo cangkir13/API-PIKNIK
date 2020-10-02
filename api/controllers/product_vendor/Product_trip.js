@@ -37,7 +37,7 @@ const Product_trip = () => {
             let insertProduct = await productTrip.create(datapostProduct, {transaction});
 
             /* insert kategori of product trip vendor */
-            let MapPostKate = idkategori.map(el => {return {id_product:insertProduct.id_piknik, id_kategori:el}})
+            let MapPostKate = idkategori.map(el => {return {id_product:insertProduct.id_product, id_kategori:el}})
 
             await relasiKategoriProd.bulkCreate(MapPostKate, {transaction})
 
@@ -104,7 +104,7 @@ const Product_trip = () => {
 
             /* get all kategories product trip vendor on has choosen */
             let dataKateTrip = await relasiKategoriProd.findAll({
-                where:{id_product:prdTrip.id_piknik,id_kategori: idkategori}
+                where:{id_product:prdTrip.id_product,id_kategori: idkategori}
             });
 
             if (dataKateTrip.length > 0) {
@@ -123,7 +123,7 @@ const Product_trip = () => {
             }
 
             /* mapping data and multiple insert kategories trip vendor */
-            let MapPostKate = idkategori.map(el => {return {id_product:prdTrip.id_piknik, id_kategori:el}})
+            let MapPostKate = idkategori.map(el => {return {id_product:prdTrip.id_product, id_kategori:el}})
 
             await relasiKategoriProd.bulkCreate(MapPostKate)
 

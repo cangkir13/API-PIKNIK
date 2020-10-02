@@ -16,6 +16,6 @@ const relasi_fasilitas_product = sequelize.define('relasi_fasilitas_product', {
   
 }, {  tbl, timestamps:false, freezeTableName:true });
 
-relasi_fasilitas_product.hasMany(Mfasil, {foreignKey:"id_fasilitas", otherKey:"id_fasilitas"})
+relasi_fasilitas_product.belongsTo(Mfasil, {foreignKey:'id_fasilitas', as:'FasilitasProduct'})
 
 module.exports = relasi_fasilitas_product;

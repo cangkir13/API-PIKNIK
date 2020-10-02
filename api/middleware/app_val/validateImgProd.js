@@ -4,7 +4,7 @@ const MimgProd = require('../../models/vendorImgProduct');
 const validateImgProd = async(iduser, id_product, imgLgth) => {
     
     let data = await MTrip.findOne({
-        where:{iduser, id_piknik:id_product}
+        where:{iduser, id_product:id_product}
     });
 
     if(!data) return {status:false, msg:"Product not found"}

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../config/database');
+const product_trip_vendor = require('./Product_trip_vendor')
 
 const tbl = 'vendor_img_product';
 
@@ -26,6 +27,7 @@ const vendor_img_product = sequelize.define('vendor_img_product', {
   }
 
 }, {  tbl, timestamps:false, freezeTableName:true });
+
 
 
 module.exports = vendor_img_product;
